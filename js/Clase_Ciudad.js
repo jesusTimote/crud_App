@@ -19,7 +19,6 @@ class Ciudad {
         console.log(agregar);
         localStorage.setItem("usuario", JSON.stringify(agregar));
     }
-
     ListCity() {
         tabla.innerHTML = "";
         let arrayLista = JSON.parse(localStorage.getItem("usuario"));
@@ -38,12 +37,14 @@ class Ciudad {
                       <td><a class='btn btn-success' style='margin-left:12px' title='Editar'><i class='fas fa-edit'></i><a/> |
                           <a class="btn btn-danger" id="DeleteCity" onclick=DeleteCity('${lista.codigo}') title='Eliminar'><i class='fas fa-trash-alt'></i><a/> </td>
                   </tr>`;
-                // <td><buttom onclick=Editar('${lista.codigo}') type='button' class='btn btn-success'><i class='fas fa-edit'></i></buttom> | <buttom type='button' onclick=DeleteCity('${lista.codigo}') class='btn btn-danger'><i class=' fas fa-trash-alt'></i></buttom></td>
+
+                ///<td><buttom onclick=Editar('${lista.codigo}') type='button' class='btn btn-success'><i class='fas fa-edit'></i></buttom> | <buttom type='button' onclick=DeleteCity('${lista.codigo}') class='btn btn-danger'><i class=' fas fa-trash-alt'></i></buttom></td>
             }
         }
         
     }
-/*
+    
+     /*
        DeleteCity(codigo) {
               let arrayLista = JSON.parse(localStorage.getItem("usuario"));
               console.log(codigo)
@@ -54,9 +55,12 @@ class Ciudad {
       
       
               }
-          }*/
+          }
+      */
       
 }
+
+
 
 /*===============Event DOM al TRAE TODO LOS DATOS AL CARGAR==============*/
 document.addEventListener("DOMContentLoaded", () => {
