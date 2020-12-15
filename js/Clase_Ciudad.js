@@ -66,6 +66,7 @@ class Ciudad {
 document.addEventListener("DOMContentLoaded", () => {
     const ui = new Ciudad();
     ui.ListCity();
+   
 });
 
 /*===============Event DE BOTON AN GUARDAR==============*/
@@ -78,6 +79,22 @@ FormCiudad.addEventListener("submit", (e) => {
 
     City.AddCity(City);
     City.ListCity();
-    City.DeleteCity();
+    FormCiudad.reset();
     e.preventDefault();
 });
+
+const DeleteCity=(codigo)=>{
+    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    
+    let Eliminado = arrayLista.findIndex((e) => e.codigo === codigo);
+    if (Eliminado !== -1) {
+        arrayLista.splice(Eliminado, 1);
+      
+        console.log("eliminado")
+        localStorage.setItem("usuario", JSON.stringify(arrayLista));
+        const City = new Ciudad();
+        City.ListCity();
+    }
+
+    
+}
