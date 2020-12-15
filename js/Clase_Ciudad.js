@@ -1,8 +1,10 @@
 const FormCiudad = document.getElementById("Ciudad");
 let tabla = document.getElementById("table");
-
 let agregar = [];
-
+const btnActualiza=document.getElementById("Actualiza");
+const btnCancelar=document.getElementById("Cancela");
+const btnCiudad = document.getElementById("boton");
+const busca = document.getElementById("buscar");
 /*====== CLASES DE LOGICA =====*/
 class Ciudad {
     constructor(codigo, ciudad) {
@@ -34,7 +36,7 @@ class Ciudad {
                       <td> # </td>
                       <td>${lista.codigo}</td>
                       <td>${lista.ciudad}</td>
-                      <td><a class='btn btn-success' style='margin-left:12px' title='Editar'><i class='fas fa-edit'></i><a/> |
+                      <td><a class='btn btn-success' style='margin-left:12px' onclick=UpdateCity('${lista.codigo}') title='Editar'><i class='fas fa-edit'></i><a/> |
                           <a class="btn btn-danger" id="DeleteCity" onclick=DeleteCity('${lista.codigo}') title='Eliminar'><i class='fas fa-trash-alt'></i><a/> </td>
                   </tr>`;
 
@@ -98,3 +100,72 @@ const DeleteCity=(codigo)=>{
 
     
 }
+
+const UpdateCity = (codigo) => {
+    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let codi = document.getElementById("codi");
+  
+    let cod = document.getElementById("codigo");
+    let ciudad = document.getElementById("ciudad");
+  
+    let Busca = arrayLista.find((e) => e.codigo == codigo);
+    let Modifica = arrayLista.findIndex((e) => e.codigo === codigo);
+  
+    codi.value = Modifica;
+    cod.value = Busca.codigo;
+    ciudad.value = Busca.ciudad;
+  
+    btnCiudad.style.display = "none";
+    btnActualiza.style.visibility = "visible";
+    btnCancelar.style.visibility = "visible";
+  };
+  
+  const Modifica = () => {
+    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let codi = document.getElementById("codi").value;
+  
+    let codigo = document.getElementById("codigo").value;
+    let ciudad = document.getElementById("ciudad").value;
+  
+    arrayLista[codi].codigo = codigo;
+    arrayLista[codi].ciudad = ciudad;
+    localStorage.setItem("usuario", JSON.stringify(arrayLista));
+    const City = new Ciudad();
+    City.ListCity();
+    FormCiudad.reset();
+    btnCancelar.style.visibility = "hidden";
+    btnActualiza.style.visibility = "hidden";
+    btnCiudad.style.display = "block";
+  };
+  const Actualiza = (document.getElementById("Actualiza").onclick = Modifica);
+
+
+
+  btnCancelar.addEventListener('click',(e)=>{
+    FormCiudad.reset();
+    e.preventDefault();
+    btnActualiza.style.visibility = "hidden";
+    btnCiudad.style.display = "block";
+  
+    btnCancelar.style.visibility = "hidden";
+  })
+
+
+
+  busca.addEventListener("keyup", () => {
+    tabla.innerHTML = "";
+    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let IngresaMinuscula = busca.value.toLowerCase();
+    for (lista of arrayLista) {
+      let BuscaMinuscula = lista.ciudad.toLowerCase();
+      if (BuscaMinuscula.indexOf(IngresaMinuscula) !== -1) {
+        tabla.innerHTML += `
+              <tr>
+                  <td> # </td>
+                  <td>${lista.codigo}</td>
+                  <td>${lista.ciudad}</td>
+                  <td><buttom onclick=Editar('${lista.codigo}') type='button' class='btn btn-success'><i class='fas fa-edit'></i></buttom> | <buttom type='button' onclick=Eliminar('${lista.codigo}')  class='btn btn-danger'><i class=' fas fa-trash-alt'></i></buttom></td>
+              </tr>`;
+      }
+    }
+  });
