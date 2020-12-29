@@ -19,11 +19,11 @@ class Ciudad {
         }
         agregar.push(City);
         console.log(agregar);
-        localStorage.setItem("usuario", JSON.stringify(agregar));
+        localStorage.setItem("ciudad", JSON.stringify(agregar));
     }
     ListCity() {
         tabla.innerHTML = "";
-        let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+        let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
         agregar = arrayLista;
 
         //tabla.innerHTML += '';
@@ -36,7 +36,7 @@ class Ciudad {
                       <td> # </td>
                       <td>${lista.codigo}</td>
                       <td>${lista.ciudad}</td>
-                      <td><a class='btn btn-success' style='margin-left:12px' onclick=UpdateCity('${lista.codigo}') title='Editar'><i class='fas fa-edit'></i><a/> |
+                      <td><a class='btn btn-success'  onclick=UpdateCity('${lista.codigo}') title='Editar'><i class='fas fa-edit'></i><a/> |
                           <a class="btn btn-danger" id="DeleteCity" onclick=DeleteCity('${lista.codigo}') title='Eliminar'><i class='fas fa-trash-alt'></i><a/> </td>
                   </tr>`;
 
@@ -86,14 +86,14 @@ FormCiudad.addEventListener("submit", (e) => {
 });
 
 const DeleteCity=(codigo)=>{
-    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
     
     let Eliminado = arrayLista.findIndex((e) => e.codigo === codigo);
     if (Eliminado !== -1) {
         arrayLista.splice(Eliminado, 1);
       
         console.log("eliminado")
-        localStorage.setItem("usuario", JSON.stringify(arrayLista));
+        localStorage.setItem("ciudad", JSON.stringify(arrayLista));
         const City = new Ciudad();
         City.ListCity();
     }
@@ -102,7 +102,7 @@ const DeleteCity=(codigo)=>{
 }
 
 const UpdateCity = (codigo) => {
-    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
     let codi = document.getElementById("codi");
   
     let cod = document.getElementById("codigo");
@@ -121,7 +121,7 @@ const UpdateCity = (codigo) => {
   };
   
   const Modifica = () => {
-    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
     let codi = document.getElementById("codi").value;
   
     let codigo = document.getElementById("codigo").value;
@@ -129,7 +129,7 @@ const UpdateCity = (codigo) => {
   
     arrayLista[codi].codigo = codigo;
     arrayLista[codi].ciudad = ciudad;
-    localStorage.setItem("usuario", JSON.stringify(arrayLista));
+    localStorage.setItem("ciudad", JSON.stringify(arrayLista));
     const City = new Ciudad();
     City.ListCity();
     FormCiudad.reset();
@@ -154,7 +154,7 @@ const UpdateCity = (codigo) => {
 
   busca.addEventListener("keyup", () => {
     tabla.innerHTML = "";
-    let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+    let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
     let IngresaMinuscula = busca.value.toLowerCase();
     for (lista of arrayLista) {
       let BuscaMinuscula = lista.ciudad.toLowerCase();
