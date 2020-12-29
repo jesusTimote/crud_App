@@ -42,3 +42,16 @@ table > tbody:empty:before {
     max-width: 360px;
     top: 30px;
 }
+
+.content-tabla{
+  
+    width: 80%;
+    margin: 0 auto;
+    min-width: 1300px;
+}
+.titulo-tabla{
+    text-align: center;
+    margin:0.7rem;
+    font-size: 3em;
+    font-family: math;
+}

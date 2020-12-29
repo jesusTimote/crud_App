@@ -26,7 +26,7 @@ const Guardar = () => {
   } else {
     agregar.push(Datos);
     console.log(agregar);
-    localStorage.setItem("usuario", JSON.stringify(agregar));
+    localStorage.setItem("ciudad", JSON.stringify(agregar));
     listar();
   }
 };
@@ -35,7 +35,7 @@ const Guardar = () => {
 
 const listar = () => {
   tabla.innerHTML = "";
-  let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+  let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
   agregar = arrayLista;
 
   //tabla.innerHTML += '';
@@ -61,7 +61,7 @@ const busca = document.getElementById("buscar");
 
 busca.addEventListener("keyup", () => {
   tabla.innerHTML = "";
-  let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+  let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
   let IngresaMinuscula = busca.value.toLowerCase();
   for (lista of arrayLista) {
     let BuscaMinuscula = lista.ciudad.toLowerCase();
@@ -80,12 +80,12 @@ busca.addEventListener("keyup", () => {
 /*=================METODO ELIMINAR==================*/
 
 const Eliminar = (codigo) => {
-  let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+  let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
 
   let Eliminado = arrayLista.findIndex((e) => e.codigo === codigo);
   if (Eliminado !== -1) {
     arrayLista.splice(Eliminado, 1);
-    localStorage.setItem("usuario", JSON.stringify(arrayLista));
+    localStorage.setItem("ciudad", JSON.stringify(arrayLista));
 
     listar();
   }
@@ -93,7 +93,7 @@ const Eliminar = (codigo) => {
 
 /*=================METODO EDITAR==================*/
 const Editar = (codigo) => {
-  let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+  let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
   let codi = document.getElementById("codi");
 
   let cod = document.getElementById("codigo");
@@ -112,7 +112,7 @@ const Editar = (codigo) => {
 };
 
 const Modifica = () => {
-  let arrayLista = JSON.parse(localStorage.getItem("usuario"));
+  let arrayLista = JSON.parse(localStorage.getItem("ciudad"));
   let codi = document.getElementById("codi").value;
 
   let codigo = document.getElementById("codigo").value;
@@ -120,7 +120,7 @@ const Modifica = () => {
 
   arrayLista[codi].codigo = codigo;
   arrayLista[codi].ciudad = ciudad;
-  localStorage.setItem("usuario", JSON.stringify(arrayLista));
+  localStorage.setItem("ciudad", JSON.stringify(arrayLista));
   listar();
   FormCiudad.reset();
 
